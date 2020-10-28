@@ -124,7 +124,6 @@ public class PlayerController : MonoBehaviour
                 //TODO: Ensure you position the new bullet at the bulletSpawn position
                 GameObject currentBullet = bulletPoolManager.GetBullet();
                 currentBullet.transform.position = bulletSpawn.position;
-                
             }
 
         }
