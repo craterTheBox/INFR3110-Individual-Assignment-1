@@ -27,11 +27,10 @@ public class BulletPoolManager : MonoBehaviour
 
     void _BuildBulletPool()
     {
-
         for (int i = 0; i < MaxBullets; i++)
         {
+            //Instantiates all bullets, sets them inactive, then queues them for use
             GameObject temp = Instantiate(bullet);
-
             temp.SetActive(false);
 
             BulletPool.Enqueue(temp);
@@ -51,8 +50,8 @@ public class BulletPoolManager : MonoBehaviour
         if (isEmpty())
             _BuildBulletPool();
 
+        //Sets it active before dequeuing it
         BulletPool.Peek().SetActive(true);
-        //Debug.Log("Size on GetBullet: " + CheckSize());
         return BulletPool.Dequeue();
     }
 
@@ -62,10 +61,8 @@ public class BulletPoolManager : MonoBehaviour
         bullet.SetActive(false);
         BulletPool.Enqueue(bullet);
 
-        //Checks if it's greater than the max, and if it is then it dumps a bunch
+        //Checks if it's greater than the max, and if it is then it wipes it. Mainly used for debugging and testing
         isTooLarge();
-
-        //Debug.Log("Size on ResetBullet: " + CheckSize());
     }
 
     int CheckSize()
@@ -86,7 +83,6 @@ public class BulletPoolManager : MonoBehaviour
         {
             BulletPool.Clear();
             _BuildBulletPool();
-            //Debug.Log("isTooLarge reset it");
         }
     }
 
